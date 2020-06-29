@@ -35,5 +35,13 @@ class PlayerTest < Minitest::Test
     player = Player.new('Clarisa', deck)
 
     assert_equal false, player.has_lost?
+    player.deck.remove_card
+    assert_equal false, player.has_lost?
+    player.deck.remove_card
+    assert_equal false, player.has_lost?
+    player.deck.remove_card
+    assert_equal true, player.has_lost?
+
+    assert_equal deck, player.deck
   end
 end
