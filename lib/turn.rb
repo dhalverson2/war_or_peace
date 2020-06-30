@@ -45,6 +45,34 @@ class Turn
     end
   end
 
+  # def players
+  #   [@player1, @player2]
+  # end
+  # if type == :basic
+  #   players.each { |player| spoils_of_war << player.deck.remove_card }
+  # elsif type == :war
+  #   players.each { |player| spoils_of_war << 3.times}
+
+
+  def pile_cards
+    if type == :basic
+      spoils_of_war << player1.deck.remove_card
+      spoils_of_war << player2.deck.remove_card
+    elsif type == :war
+      3.times do
+        spoils_of_war << player1.deck.remove_card
+        spoils_of_war << player2.deck.remove_card
+      end
+    else
+      3.times do
+        player1.deck.remove_card
+        player2.deck.remove_card
+      end
+    end
+  end
+
+
+
 
 
 end
