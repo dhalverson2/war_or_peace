@@ -167,6 +167,6 @@ class PlayerTest < Minitest::Test
     player2 = Player.new("Aurora", deck2)
     turn = Turn.new(player1, player2)
 
-    
+    assert_equal [], turn.spoils_of_war
   end
 end
