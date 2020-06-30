@@ -24,4 +24,6 @@ class Turn
       :basic
     end
   end
+
+
 end
