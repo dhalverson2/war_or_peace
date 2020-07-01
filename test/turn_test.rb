@@ -1,5 +1,6 @@
 require 'minitest/autorun'
 require 'minitest/pride'
+require 'minitest/pretty-diffs'
 require './lib/card'
 require './lib/deck'
 require './lib/player'
@@ -117,7 +118,7 @@ class PlayerTest < Minitest::Test
     winner = turn.winner
     turn.pile_cards
     turn.award_spoils(winner)
-    expected1 = [card2, card5, card8, card1, card3]
+    expected1 = [card1, card5, card8, card1, card3]
     expected2 = [card4, card6, card7]
     assert_equal expected1, player1.deck.cards
     assert_equal expected2, player2.deck.cards
