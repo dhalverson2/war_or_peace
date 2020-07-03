@@ -61,8 +61,8 @@ shuffled_deck = deck.shuffle
 deck1 = Deck.new(shuffled_deck[0..25])
 deck2 = Deck.new(shuffled_deck[26..52])
 
-player1 = Player.new("Megan", deck1)
-player2 = Player.new("Aurora", deck2)
+player1 = Player.new("Dan", deck1)
+player2 = Player.new("Anna", deck2)
 
 game = Game.new(player1, player2)
 game.start

@@ -41,13 +41,16 @@ class Game
   def welcome_message
     user_input = ""
     until user_input == "GO" do
+      puts render_art
+      puts
+      sleep 1.5
       p "Welcome to War! (or Peace) This game will be played with 52 cards"
-      sleep 1
+      sleep 0.75
+      puts
       p "The players today are #{@player1.name} and #{@player2.name}."
-      sleep 1
+      sleep 0.75
+      puts
       p "Type 'GO' to start the game!"
-      sleep 1 g
-      p "------------------------------------------------------------------------"
       user_input = gets.chomp.upcase
     end
   end
@@ -61,4 +64,11 @@ class Game
       p "---- DRAW ----"
     end
   end
+
+  def render_art
+    File.read("welcome.txt") do |line|
+      puts line
+    end
+  end
+
 end
