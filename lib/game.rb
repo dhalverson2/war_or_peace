@@ -1,4 +1,7 @@
 require './lib/turn'
+require './lib/player'
+require './lib/card'
+require './lib/deck'
 
 class Game
 
@@ -14,25 +17,42 @@ class Game
 
   def play_game
     turn_count = 1
-      until @player1.has_lost? || @player2.has_lost? || turn_count == 1_000_000 do
-        turn = Turn.new(@player1, @player2)
-        p "Turn type: #{turn.type}"
-        winner = turn.winner
-        if turn.type == :basic
-          turn.pile_cards
-          turn.award_spoils(winner)
-          p "Turn #{turn_count}: #{winner.name} won 2 cards"
-        elsif turn.type == :basic
-          turn.pile_cards
-          turn.award_spoils(winner)
-          p "Turn #{turn_count}: #{winner.name} won 6 cards"
-        elsif turn.type == :mutually_assured_destruction
-          turn.pile_cards
-          p "*mutually assured destruction* 6 cards removed from play"
-        end
-        turn_count += 1
+    until @player1.has_lost? || @player2.has_lost? || turn_count == 1_000_000 do
+      turn = Turn.new(@player1, @player2)
+      p "Turn type: #{turn.type}"
+      winner = turn.winner
+      if turn.type == :basic
+        turn.pile_cards
+        turn.award_spoils(winner)
+        p "Turn #{turn_count}: #{winner.name} won 2 cards"
+      elsif turn.type == :war
+        turn.pile_cards
+        turn.award_spoils(winner)
+        p "Turn #{turn_count}: #{winner.name} won 6 cards"
+      elsif turn.type == :mutually_assured_destruction
+        turn.pile_cards
+        p "*mutually assured destruction* 6 cards removed from play"
       end
-      game_over
+    turn_count += 1
+    end
+    game_over
+  end
+
+  def welcome_message
+    user_input = ""
+    until user_input == "GO" do
+      puts render_art
+      puts
+      sleep 1.5
+      p "Welcome to War! (or Peace) This game will be played with 52 cards"
+      sleep 0.75
+      puts
+      p "The players today are #{@player1.name} and #{@player2.name}."
+      sleep 0.75
+      puts
+      p "Type 'GO' to start the game!"
+      user_input = gets.chomp.upcase
+    end
   end
 
   def game_over
@@ -45,14 +65,10 @@ class Game
     end
   end
 
-  def welcome_message
-    user_input = ""
-    until input == "GO" do
-      p "Welcome to War! (or Peace) This game will be played with 52 cards"
-      p "The players today are #{player1.name} and #{player2.name}."
-      p "Type 'GO' to start the game!"
-      p "------------------------------------------------------------------------"
-      user_input = gets.chomp.upcase
+  def render_art
+    File.read("welcome.txt") do |line|
+      puts line
     end
   end
+
 end
