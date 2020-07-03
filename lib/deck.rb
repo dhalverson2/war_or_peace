@@ -6,6 +6,8 @@ class Deck
   end
 
   def rank_of_card_at(index)
+    return 0 if @cards.empty?
+    # require "pry"; binding.pry
     @cards[index].rank
   end
 
