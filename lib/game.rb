@@ -5,6 +5,7 @@ require './lib/deck'
 
 class Game
 
+  attr_reader :turn_count
   def initialize(player1, player2)
     @player1 = player1
     @player2 = player2
@@ -16,8 +17,8 @@ class Game
   end
 
   def play_game
-    turn_count = 1
-    until @player1.has_lost? || @player2.has_lost? || turn_count == 1_000_000 do
+    @turn_count = 1
+    until game_over? do
       turn = Turn.new(@player1, @player2)
       p "Turn type: #{turn.type}"
       winner = turn.winner
@@ -33,9 +34,9 @@ class Game
         turn.pile_cards
         p "*mutually assured destruction* 6 cards removed from play"
       end
-    turn_count += 1
+    @turn_count += 1
     end
-    game_over
+    print_game_summary
   end
 
   def welcome_message
@@ -51,11 +52,12 @@ class Game
       sleep 0.75
       puts
       p "Type 'GO' to start the game!"
+      puts
       user_input = gets.chomp.upcase
     end
   end
 
-  def game_over
+  def print_game_summary
     if @player1.deck.cards.count == 0
       p "*~*~*~* #{@player2.name} has won the game! *~*~*~*"
     elsif @player2.deck.cards.count == 0
@@ -63,6 +65,14 @@ class Game
     else
       p "---- DRAW ----"
     end
+  end
+
+  def print_turn_summary
+
+  end
+
+  def game_over?
+    @player1.has_lost? || @player2.has_lost? || turn_count == 1_000_000
   end
 
   def render_art

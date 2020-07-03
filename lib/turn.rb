@@ -59,7 +59,7 @@ class Turn
   end
 
   def award_spoils(winner)
-    @spoils_of_war.each do |card|
+    @spoils_of_war.shuffle!.each do |card|
       winner.deck.cards << card if winner == @player1 || winner == @player2
     end
     @spoils_of_war = []
