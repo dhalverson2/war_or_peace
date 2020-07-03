@@ -22,7 +22,7 @@ class DeckTest < Minitest::Test
     cards = [card1, card2, card3]
     deck = Deck.new(cards)
 
-    assert_equal [card1, card2, card3], deck.cards
+    assert_equal [@card1, card2, card3], deck.cards
   end
 
   def test_it_can_find_rank_of_card_at
