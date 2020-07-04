@@ -59,10 +59,16 @@ class Turn
   end
 
   def award_spoils(winner)
-    @spoils_of_war.each do |card|
-      winner.deck.cards << card if winner == @player1 || winner == @player2
+    @spoils_of_war.shuffle!.each do |card|
+      winner.deck.cards << card unless winner == "No Winner"
     end
     @spoils_of_war = []
+    # @spoils_of_war.shuffle!
+    # if winner.class == Player
+    #   until @spoils_of_war.empty? do
+    #     winner.deck.add_card(@spoils_of_war.shift)
+    #   end
+    # end
   end
 
   private
