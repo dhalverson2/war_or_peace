@@ -6,9 +6,14 @@ class Deck
   end
 
   def rank_of_card_at(index)
-    return 0 if @cards.empty?
-    # require "pry"; binding.pry
-    @cards[index].rank
+    if @cards[index].nil?
+      0
+    else
+      @cards[index].rank
+    end
+    # return 0 if @cards.empty?
+    # # require "pry"; binding.pry
+    # @cards[index].rank
   end
 
   def high_ranking_cards
