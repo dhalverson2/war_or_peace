@@ -19,14 +19,15 @@ class Game
   def welcome_message
     user_input = ""
     until user_input == "GO" do
+      puts "\n"*3
       puts start_art
-      puts
-      sleep 1.0
+      puts "\n"*3
+      sleep 0.5
       p "Welcome to War! (or Peace) This game will be played with 52 cards"
-      sleep 0.75
+      sleep 0.25
       puts
       p "The players today are #{@player1.name} and #{@player2.name}."
-      sleep 0.75
+      sleep 0.25
       puts
       p "Type 'GO' to start the game!"
       puts
@@ -52,13 +53,11 @@ class Game
     if turn.winner.class == Player
       puts "\n"*3
       p "*** #{turn.winner.name} has won the game! ***"
-      puts
       puts game_over_art
       puts "\n"*3
     else
       puts "\n"*3
       p "---- DRAW ----"
-      puts
       puts game_over_art
       puts "\n"*3
     end
@@ -78,10 +77,6 @@ class Game
   def game_over?
     @player1.has_lost? || @player2.has_lost? || turn_count == 1_000_000
   end
-
-  # def neither_player_won?
-  #   !@player1.has_lost? && !@player2.has_lost?
-  # end
 
   def start_art
     File.read("welcome.txt") do |line|
