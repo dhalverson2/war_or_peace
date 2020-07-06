@@ -11,9 +11,6 @@ class Deck
     else
       @cards[index].rank
     end
-    # return 0 if @cards.empty?
-    # # require "pry"; binding.pry
-    # @cards[index].rank
   end
 
   def high_ranking_cards
